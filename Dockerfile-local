@@ -1,0 +1,6 @@
+# runner
+FROM alpine:latest as runner
+## copy binary
+COPY app .
+## Run
+ENTRYPOINT ["./app"]
