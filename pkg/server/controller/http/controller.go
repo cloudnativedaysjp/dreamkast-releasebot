@@ -237,7 +237,7 @@ func (ic *InteractionMsgController) SelectedConfirmRelease(w http.ResponseWriter
 			}
 		}()
 		// create -> label -> merge PullRequest
-		prNum, err := ic.gitApi.CreatePullRequest(ctx, org, repo, temporaryBranchForRelease, ic.baseBranch, "Automatic Release", "Automatic Release")
+		prNum, err := ic.gitApi.CreatePullRequest(ctx, org, repo, temporaryBranchForRelease, ic.baseBranch, "[dreamkast-releasebot] Automatic Release", "Automatic Release")
 		if err != nil {
 			ic.logger.Error("CreatePullRequest() failed. ", err)
 			if err := ic.slackMsg.UpdateMessage(ctx, view.IntMsgReleaseFailed(originalMessage, org, repo, level), channelId, originalMessage.Timestamp); err != nil {
