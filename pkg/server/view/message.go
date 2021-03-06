@@ -69,7 +69,7 @@ func CommandRelease(callbackId string, repoUrls []string) (msg slack.Message) {
 		org := filepath.Base(filepath.Dir(repoUrl))
 		options = append(options,
 			slack.AttachmentActionOption{
-				Text:  fmt.Sprintf("github.com/%s/%s", org, repo),
+				Text:  fmt.Sprintf("%s/%s", org, repo),
 				Value: fmt.Sprintf("%s__%s", org, repo),
 			},
 		)
