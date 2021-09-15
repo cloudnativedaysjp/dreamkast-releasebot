@@ -74,8 +74,8 @@ jobs:
         uses: cloudnativedaysjp/action-dreamkast-gitops@main
         with:
           base_dir: dreamkast-infra
-          app_target_dir: manifests/app/dreamkast-releasebot/overlays/development
-          argo_target_file: manifests/app/argocd-apps/development/dreamkast-releasebot.yaml
+          app_target_dir: manifests/app/dreamkast-releasebot/overlays/production
+          argo_target_file: manifests/app/argocd-apps/production/dreamkast-releasebot.yaml
           image: ${{ steps.ecr.outputs.IMAGE_WITH_SHA }}
           namespace: dreamkast-releasebot
 
