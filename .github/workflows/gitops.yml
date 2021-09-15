@@ -40,24 +40,18 @@ jobs:
             IMAGE_TAG=${{ github.head_ref }}
           fi
 
-          BUILDER=$ECR_REGISTRY/$ECR_REPOSITORY:builder
-
           IMAGE_WITH_TAG=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           IMAGE_WITH_SHA=$ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
 
           docker build \
-            --cache-from=$BUILDER \
             --build-arg=BUILDKIT_INLINE_CACHE=1 \
             --build-arg=VERSION=${{ github.sha }} \
             -t $IMAGE_WITH_TAG \
             -t $IMAGE_WITH_SHA .
 
-          docker build --target node -t $BUILDER --build-arg=BUILDKIT_INLINE_CACHE=1  .
-
           docker tag $IMAGE_WITH_TAG $IMAGE_WITH_SHA
           docker push $IMAGE_WITH_TAG
           docker push $IMAGE_WITH_SHA
-          docker push $BUILDER
 
           echo "::set-output name=IMAGE_TAG::${IMAGE_TAG}"
           echo "::set-output name=IMAGE_WITH_TAG::${IMAGE_WITH_TAG}"
